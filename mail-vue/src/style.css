@@ -1,0 +1,1078 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    scrollbar-width: thin;
+    scrollbar-color: var(--dark-border) transparent;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+}
+
+:deep(.el-input__inner:focus) {
+    background-color: transparent !important;
+    border-color: #dcdfe6 !important;
+}
+
+.el-table thead th {
+    font-weight: bold !important;
+}
+
+body {
+    font-family: Inter, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--el-text-color-primary);
+    font-size: 14px;
+}
+
+/* —— 界面动效 + iOS 视觉皮肤（与预览稿一致的观感） —— */
+html.ui-motion-ios {
+    --cm-ease: cubic-bezier(.25, .1, .25, 1);
+    --cm-spring: cubic-bezier(.32, .72, 0, 1);
+    --cm-spring-b: cubic-bezier(.34, 1.56, .64, 1);
+    --cm-dur: .32s;
+
+    /* iOS 观感：侧栏 / 卡片 / 圆角 / 毛玻璃 */
+    --aside-backgound: #0b1220 !important;
+    --aside-menu-active-background: rgba(24, 144, 255, .22) !important;
+    --aside-right-border: 0 0 24px rgba(15, 23, 42, .18) !important;
+    --settings-page-background: #f2f4f8 !important;
+    --base-fill: #f3f5f9 !important;
+    --el-border-radius-base: 10px;
+    --el-border-radius-small: 8px;
+}
+
+html.ui-motion-classic {
+    --cm-ease: ease;
+    --cm-spring: ease;
+    --cm-spring-b: ease;
+}
+
+/* 全局背景更接近预览 */
+html.ui-motion-ios,
+html.ui-motion-ios body {
+    background: #f2f4f8 !important;
+}
+
+html.ui-motion-ios.dark,
+html.ui-motion-ios.dark body {
+    background: var(--el-bg-color) !important;
+}
+
+/* 顶栏毛玻璃 */
+html.ui-motion-ios .el-header {
+    background: rgba(255, 255, 255, .78) !important;
+    backdrop-filter: saturate(180%) blur(18px) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(18px) !important;
+    border-bottom: 1px solid rgba(15, 23, 42, .06) !important;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .6) inset;
+}
+
+html.ui-motion-ios.dark .el-header {
+    background: rgba(20, 20, 20, .72) !important;
+}
+
+/* 侧栏 */
+html.ui-motion-ios .el-aside,
+html.ui-motion-ios .aside {
+    background: linear-gradient(180deg, #0b1220 0%, #0f172a 100%) !important;
+}
+
+html.ui-motion-ios .el-menu,
+html.ui-motion-ios .el-menu-item,
+html.ui-motion-ios :deep(.el-scrollbar__wrap--hidden-default) {
+    background: transparent !important;
+}
+
+html.ui-motion-ios .el-menu-item {
+    margin: 4px 10px !important;
+    border-radius: 10px !important;
+    height: 40px !important;
+    color: #e2e8f0 !important;
+}
+
+/* 仅高亮 el-menu 当前项，避免 choose-item + is-active 叠加重影 */
+html.ui-motion-ios .el-menu-item.is-active {
+    background: linear-gradient(90deg, rgba(24, 144, 255, .32), rgba(24, 144, 255, .08)) !important;
+    color: #fff !important;
+    box-shadow: inset 0 0 0 1px rgba(24, 144, 255, .22);
+    font-weight: 600;
+}
+
+html.ui-motion-ios .el-menu-item:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+}
+
+html.ui-motion-ios .el-menu-item.is-active:hover {
+    background: linear-gradient(90deg, rgba(24, 144, 255, .32), rgba(24, 144, 255, .08)) !important;
+}
+
+/* 设置卡片 / 通用卡片：更圆、更轻 */
+html.ui-motion-ios .settings-card,
+html.ui-motion-ios .el-card {
+    background: #fff !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(15, 23, 42, .05) !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .06) !important;
+    overflow: hidden;
+    transition: transform .35s var(--cm-spring), box-shadow .3s ease;
+}
+
+html.ui-motion-ios.dark .settings-card,
+html.ui-motion-ios.dark .el-card {
+    background: var(--el-bg-color-overlay, #1c1c1e) !important;
+}
+
+html.ui-motion-ios .settings-card:active,
+html.ui-motion-ios .el-card:active {
+    transform: scale(.99);
+    box-shadow: 0 12px 32px rgba(15, 23, 42, .1);
+}
+
+html.ui-motion-ios .settings-card .card-title,
+html.ui-motion-ios .settings-card .title {
+    font-weight: 700 !important;
+    letter-spacing: -.2px;
+}
+
+/* 设置列表行 */
+html.ui-motion-ios .setting-item {
+    transition: transform .24s var(--cm-spring), background-color .2s ease;
+    border-radius: 8px;
+}
+
+html.ui-motion-ios .setting-item:hover {
+    background: rgba(24, 144, 255, .04);
+}
+
+html.ui-motion-ios .setting-item:active {
+    transform: scale(.985);
+    background: rgba(24, 144, 255, .08);
+}
+
+/* 按钮 */
+html.ui-motion-ios .el-button:not(.is-disabled) {
+    border-radius: 10px !important;
+    transition: transform .24s var(--cm-spring-b), box-shadow .25s ease, background-color .2s ease !important;
+}
+
+html.ui-motion-ios .el-button:not(.is-disabled):active {
+    transform: scale(.92);
+}
+
+html.ui-motion-ios .el-button--primary {
+    box-shadow: 0 6px 16px rgba(24, 144, 255, .28);
+}
+
+/* 表格 */
+html.ui-motion-ios .el-table {
+    border-radius: 12px !important;
+    overflow: hidden;
+}
+
+html.ui-motion-ios .el-table__body tr {
+    transition: background-color .2s ease, transform .24s var(--cm-spring);
+}
+
+html.ui-motion-ios .el-table__body tr:hover {
+    transform: translateX(2px);
+}
+
+/* 弹窗更接近 iOS Sheet 观感 */
+html.ui-motion-ios .el-dialog {
+    border-radius: 16px !important;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(15, 23, 42, .22) !important;
+    animation: cm-dialog-in .48s var(--cm-spring) both !important;
+}
+
+html.ui-motion-ios .el-dialog__header,
+html.ui-motion-ios .el-dialog__footer {
+    background: rgba(248, 250, 252, .9);
+}
+
+html.ui-motion-ios .el-overlay {
+    animation: cm-fade-in .3s var(--cm-ease) both;
+    background: rgba(15, 23, 42, .4) !important;
+}
+
+html.ui-motion-ios .el-drawer__content,
+html.ui-motion-ios .el-drawer {
+    transition: transform .48s var(--cm-spring) !important;
+}
+
+html.ui-motion-ios .el-drawer__header {
+    margin-bottom: 8px;
+}
+
+html.ui-motion-ios .el-message-box {
+    border-radius: 16px !important;
+    animation: cm-dialog-in .45s var(--cm-spring) both !important;
+}
+
+html.ui-motion-ios .el-notification {
+    border-radius: 14px !important;
+    animation: cm-toast-in .5s var(--cm-spring) both !important;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, .16) !important;
+}
+
+html.ui-motion-ios .el-message {
+    border-radius: 12px !important;
+    animation: cm-toast-in .42s var(--cm-spring) both !important;
+}
+
+html.ui-motion-ios .el-dropdown-menu {
+    border-radius: 12px !important;
+    animation: cm-pop-in .36s var(--cm-spring-b) both !important;
+    transform-origin: top right;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, .16) !important;
+}
+
+html.ui-motion-ios .el-dropdown-menu__item {
+    border-radius: 8px;
+    margin: 2px 6px;
+}
+
+html.ui-motion-ios .el-dropdown-menu__item:active {
+    transform: scale(.97);
+}
+
+/* 开关 / 输入 */
+html.ui-motion-ios .el-switch__action {
+    transition: transform .36s var(--cm-spring-b) !important;
+}
+
+html.ui-motion-ios .el-switch__core {
+    border-radius: 999px !important;
+    transition: background-color .28s var(--cm-ease), border-color .28s ease !important;
+}
+
+html.ui-motion-ios .el-input__wrapper,
+html.ui-motion-ios .el-textarea__inner,
+html.ui-motion-ios .el-select__wrapper {
+    border-radius: 10px !important;
+    transition: box-shadow .25s ease, transform .22s var(--cm-ease);
+}
+
+html.ui-motion-ios .el-input__wrapper.is-focus {
+    box-shadow: 0 0 0 3px rgba(24, 144, 255, .18) !important;
+    transform: scale(1.01);
+}
+
+html.ui-motion-ios .el-tabs__active-bar {
+    transition: transform .36s var(--cm-spring), width .36s var(--cm-spring) !important;
+    border-radius: 2px;
+}
+
+html.ui-motion-ios .el-tag {
+    border-radius: 8px !important;
+}
+
+/* 个人设置 / 邮件列表区域 */
+html.ui-motion-ios .box,
+html.ui-motion-ios .container {
+    /* 保持结构，仅优化字重感 */
+}
+
+html.ui-motion-ios .push-setting .push-item,
+html.ui-motion-ios .language,
+html.ui-motion-ios .del-email {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid rgba(15, 23, 42, .05);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, .05);
+    padding: 16px 18px;
+}
+
+/* 新布局（layout-ios）内主内容高度自适应，并保证可点击 */
+html.ui-motion-ios .main-box-show,
+html.ui-motion-ios .main-box-hide {
+    height: auto !important;
+    min-height: calc(100vh - 200px);
+    pointer-events: auto !important;
+}
+
+html.ui-motion-ios .main-view,
+html.ui-motion-ios .ios-scroll,
+html.ui-motion-ios .main-box-show > *,
+html.ui-motion-ios .main-box-hide > * {
+    pointer-events: auto !important;
+}
+
+html.ui-motion-ios .main-view {
+    background: transparent !important;
+}
+
+/* ===== 新布局滚动：让「内部滚动页」有确定高度，「长表单页」可外层滚 ===== */
+html.ui-motion-ios .ios-scroll {
+    display: flex !important;
+    flex-direction: column !important;
+    height: calc(100vh - 60px) !important;
+    max-height: calc(100vh - 60px) !important;
+    overflow: hidden !important;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+}
+
+html.ui-motion-ios .ios-hero {
+    flex: 0 0 auto;
+}
+
+html.ui-motion-ios .ios-scroll > .main-box-show,
+html.ui-motion-ios .ios-scroll > .main-box-hide {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: hidden !important;
+}
+
+html.ui-motion-ios .main-view {
+    min-height: 0 !important;
+    height: 100% !important;
+    overflow: hidden !important;
+}
+
+/* 依赖 height:100% + 内部滚动条的页面 */
+html.ui-motion-ios .settings-container,
+html.ui-motion-ios .user-box,
+html.ui-motion-ios .reg-key,
+html.ui-motion-ios .role,
+html.ui-motion-ios .role-box,
+html.ui-motion-ios .perm-box,
+html.ui-motion-ios .all-email,
+html.ui-motion-ios .email-list-box,
+html.ui-motion-ios .content,
+html.ui-motion-ios .main-view > .el-scrollbar {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
+}
+
+html.ui-motion-ios .settings-container .scroll,
+html.ui-motion-ios .settings-container .el-scrollbar,
+html.ui-motion-ios .reg-key .scrollbar,
+html.ui-motion-ios .user-box .el-scrollbar,
+html.ui-motion-ios .role .el-scrollbar,
+html.ui-motion-ios .perm-box .el-scrollbar,
+html.ui-motion-ios .perm-box .perm-scrollbar,
+html.ui-motion-ios .email-list-box .el-scrollbar,
+html.ui-motion-ios .main-view > .el-scrollbar {
+    height: 100% !important;
+    max-height: 100% !important;
+}
+
+html.ui-motion-ios .settings-container .scroll .el-scrollbar__wrap,
+html.ui-motion-ios .settings-container .scroll .el-scrollbar__view,
+html.ui-motion-ios .reg-key .scrollbar .el-scrollbar__wrap,
+html.ui-motion-ios .main-view > .el-scrollbar .el-scrollbar__wrap {
+    overflow-y: auto !important;
+    max-height: 100% !important;
+}
+
+/* 系统设置：内层 el-scrollbar 视口高度修正（原先 min-height:100% + view height:100% 会撑死） */
+html.ui-motion-ios .settings-container .scroll {
+    min-height: 0 !important;
+    height: 100% !important;
+}
+
+html.ui-motion-ios .settings-container .scroll .el-scrollbar__view {
+    height: auto !important;
+    min-height: 100% !important;
+}
+
+/* 个人设置：内容较长，用页面容器自己滚 */
+html.ui-motion-ios .box {
+    height: 100% !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 分析页图表区允许内部滚 */
+html.ui-motion-ios .analysis-loading {
+    height: 100% !important;
+}
+
+html.ui-motion-ios .analysis {
+    height: auto !important;
+    min-height: 100%;
+}
+
+/* 注册密钥：工具条 + 列表 */
+html.ui-motion-ios .reg-key .scrollbar {
+    height: calc(100% - 48px) !important;
+}
+
+/* 经典布局下若 main 区高度异常，也保证可滚 */
+html.ui-motion-classic .main-view,
+html .main-view {
+    overflow: auto;
+}
+html.ui-motion-ios .hide,
+html.ui-motion-ios .block-hide {
+    pointer-events: none !important;
+}
+
+/* 弹层层级高于新布局顶栏，避免点不到下拉/弹窗 */
+html.ui-motion-ios .el-popper,
+html.ui-motion-ios .el-select__popper,
+html.ui-motion-ios .el-dropdown__popper,
+html.ui-motion-ios .el-dialog,
+html.ui-motion-ios .el-overlay,
+html.ui-motion-ios .el-drawer,
+html.ui-motion-ios .el-message-box,
+html.ui-motion-ios .el-notification,
+html.ui-motion-ios .el-message {
+    z-index: 3000 !important;
+}
+
+/* 通知弹层：隐藏右上角 X，交给滑动关闭 */
+.el-notification__closeBtn,
+html.dark .el-notification__closeBtn,
+html.ui-motion-ios .el-notification__closeBtn {
+    display: none !important;
+}
+
+.el-notification {
+    touch-action: pan-y;
+    cursor: grab;
+    user-select: none;
+}
+
+.el-notification:active {
+    cursor: grabbing;
+}
+
+/* 弹层关闭：强制向右滑出，覆盖 Element 默认淡出 */
+@keyframes cm-notify-slide-out {
+    from {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+    }
+    to {
+        transform: translateX(120%) !important;
+        opacity: 0 !important;
+    }
+}
+
+.el-notification.cm-notify-leave,
+.el-notification-fade-leave-from,
+.el-notification-fade-leave-active,
+.el-notification-fade-leave-to {
+    animation: cm-notify-slide-out 0.25s ease forwards !important;
+    transition: none !important;
+    transform: translateX(120%) !important;
+    opacity: 0 !important;
+}
+
+#loading-first,
+#loading-first.loading-hide {
+    pointer-events: none !important;
+}
+
+#loading-first {
+    z-index: 500;
+}
+
+html.ui-motion-ios .layout-ios .settings-card,
+html.ui-motion-ios .settings-card {
+    background-color: #fff !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(15, 23, 42, .05) !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .06) !important;
+}
+
+html.ui-motion-ios .el-container.layout,
+html.ui-motion-ios .layout-classic {
+    /* 经典壳在 ios 布局切换时不会挂载；此处仅兜底 */
+}
+
+@keyframes cm-dialog-in {
+    from { opacity: 0; transform: translateY(24px) scale(.94); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cm-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes cm-toast-in {
+    from { opacity: 0; transform: translateY(-20px) scale(.94); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cm-pop-in {
+    from { opacity: 0; transform: translateY(-8px) scale(.94); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.ui-motion-ios *,
+    html.ui-motion-ios *::before,
+    html.ui-motion-ios *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+html, body {
+    background: var(--el-bg-color);
+    color: var(--el-text-color-primary);
+}
+
+html.ui-motion-ios,
+html.ui-motion-ios body,
+html.ui-motion-ios #app {
+    background: #f2f4f8;
+}
+
+/* ========== 暗色模式全局统一 ========== */
+html.dark,
+html.dark body,
+html.dark #app {
+    background: #0c0f14 !important;
+    color: #e8eaed !important;
+}
+
+html.dark {
+    --el-bg-color: #0c0f14;
+    --el-bg-color-overlay: #1a1f27;
+    --el-fill-color-blank: #1a1f27;
+    --el-fill-color-light: #242a33;
+    --el-fill-color-lighter: #2a313b;
+    --el-fill-color-extra-light: #2e3641;
+    --el-text-color-primary: #f2f4f8;
+    --el-text-color-regular: #e4e7ec;
+    --el-text-color-secondary: #c0c5ce;
+    --el-text-color-placeholder: #8b929c;
+    --el-border-color: #343b45;
+    --el-border-color-light: #2c333c;
+    --el-border-color-lighter: #262c34;
+    --regular-text-color: #c0c5ce;
+    --settings-page-background: #0c0f14;
+    --extra-light-fill: #1a1f27;
+    --base-fill: #242a33;
+    --secondary-text-color: #c0c5ce;
+    --form-desc-color: #c0c5ce;
+}
+
+/* 暗色正文一律浅色（各页面通用） */
+html.dark,
+html.dark body,
+html.dark #app,
+html.dark .box,
+html.dark .box *,
+html.dark .container,
+html.dark .item,
+html.dark .item > div,
+html.dark .item span,
+html.dark .title,
+html.dark .language,
+html.dark .del-email,
+html.dark .push-setting,
+html.dark .push-item,
+html.dark .push-label,
+html.dark .push-text,
+html.dark .push-value,
+html.dark .push-status,
+html.dark .push-desc,
+html.dark .card-title,
+html.dark .setting-item,
+html.dark .setting-item > div,
+html.dark .setting-item > div > span,
+html.dark .card-content,
+html.dark .row-t,
+html.dark .row-s,
+html.dark .cell,
+html.dark .cell span,
+html.dark .cell b,
+html.dark td,
+html.dark th,
+html.dark .el-table__cell,
+html.dark .el-descriptions__label,
+html.dark .el-descriptions__content,
+html.dark .el-form-item__label,
+html.dark .el-dialog__title,
+html.dark .el-drawer__title,
+html.dark .detail-title,
+html.dark .main-view,
+html.dark .main-view *,
+html.dark .email-scroll,
+html.dark .account,
+html.dark .reg-key,
+html.dark .reg-key *,
+html.dark .role,
+html.dark .role *,
+html.dark .user,
+html.dark .analysis-page {
+    color: #f2f4f8 !important;
+}
+
+/* 次要说明文字稍浅灰，但仍可读 */
+html.dark .row-s,
+html.dark .push-status,
+html.dark .push-desc,
+html.dark .forward-hint,
+html.dark .notice-hint,
+html.dark .message-tip,
+html.dark div[style*="regular-text-color"],
+html.dark .el-empty__description p {
+    color: #c0c5ce !important;
+}
+
+/* 主按钮文字保持白色 */
+html.dark .el-button--primary,
+html.dark .el-button--primary span,
+html.dark .btn,
+html.dark .edit-name {
+    color: #fff !important;
+}
+
+html.dark .edit-name {
+    color: #69c0ff !important;
+}
+
+/* 顶栏：新布局 + 经典 el-header 一律深色 */
+html.dark .ios-top,
+html.dark.ui-motion-ios .ios-top,
+html.dark .el-header,
+html.dark.ui-motion-ios .el-header {
+    background: #12171f !important;
+    color: #e8eaed !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    box-shadow: none !important;
+    backdrop-filter: saturate(140%) blur(16px) !important;
+    -webkit-backdrop-filter: saturate(140%) blur(16px) !important;
+}
+
+html.dark .top-title,
+html.dark.ui-motion-ios .top-title,
+html.dark .breadcrumb-item,
+html.dark .header {
+    color: #e8eaed !important;
+}
+
+html.dark .icon-btn,
+html.dark .avatar-btn,
+html.dark.ui-motion-ios .icon-btn,
+html.dark.ui-motion-ios .avatar-btn,
+html.dark .header .icon-item,
+html.dark .header .avatar {
+    background: #1a1f27 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #e8eaed !important;
+    box-shadow: none !important;
+}
+
+html.dark .icon-btn:hover,
+html.dark .avatar-btn:hover {
+    background: #242a33 !important;
+}
+
+/* 壳层/滚动区统一深色，去掉白圈 */
+html.dark .layout,
+html.dark .layout-classic,
+html.dark .main-container,
+html.dark .ios-shell,
+html.dark .ios-main,
+html.dark .ios-scroll,
+html.dark .el-main {
+    background: #0c0f14 !important;
+}
+
+html.dark .main-view,
+html.dark .main-box-show,
+html.dark .main-box-hide,
+html.dark .account {
+    background: transparent !important;
+}
+
+/* 侧栏 */
+html.dark .ios-side,
+html.dark.ui-motion-ios .ios-side,
+html.dark .aside,
+html.dark .el-aside {
+    background: linear-gradient(180deg, #080b12 0%, #0c121a 100%) !important;
+    color: #c9d1d9 !important;
+}
+
+html.dark .menu,
+html.dark.ui-motion-ios .menu,
+html.dark .el-menu-item {
+    color: #c9d1d9 !important;
+}
+
+html.dark .menu.active,
+html.dark.ui-motion-ios .menu.active,
+html.dark .el-menu-item.is-active,
+html.dark.ui-motion-ios .el-menu-item.is-active {
+    background: linear-gradient(90deg, rgba(56, 132, 255, 0.22), rgba(56, 132, 255, 0.06)) !important;
+    color: #fff !important;
+}
+
+html.dark .el-menu,
+html.dark .el-menu-item {
+    background: transparent !important;
+}
+
+/* 卡片 / 设置项：深底 + 亮字 */
+html.dark .settings-card,
+html.dark.ui-motion-ios .settings-card,
+html.dark .el-card,
+html.dark.ui-motion-ios .el-card,
+html.dark .card {
+    background: #1a1f27 !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+    color: #e8eaed !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28) !important;
+}
+
+html.dark .card-title,
+html.dark.ui-motion-ios .card-title,
+html.dark .setting-item,
+html.dark.ui-motion-ios .setting-item,
+html.dark .setting-item > div,
+html.dark .settings-card .card-content,
+html.dark .settings-card .card-title,
+html.dark .box .title,
+html.dark .container .title {
+    color: #e8eaed !important;
+}
+
+html.dark .setting-item > div:first-child,
+html.dark.ui-motion-ios .setting-item > div:first-child {
+    color: #e8eaed !important;
+    font-weight: 600;
+}
+
+html.dark .push-setting .push-item,
+html.dark .language,
+html.dark .del-email,
+html.dark.ui-motion-ios .push-setting .push-item,
+html.dark.ui-motion-ios .language,
+html.dark.ui-motion-ios .del-email {
+    background: #1a1f27 !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+    color: #e8eaed !important;
+}
+
+html.dark .push-text,
+html.dark .push-label,
+html.dark .push-status,
+html.dark .row-t,
+html.dark .row-s {
+    color: #e8eaed !important;
+}
+
+html.dark .push-status,
+html.dark .row-s {
+    color: #9aa0a8 !important;
+}
+
+/* 表格（用户列表 / 全部邮件等） */
+html.dark .el-table,
+html.dark.ui-motion-ios .el-table {
+    --el-table-bg-color: #1a1f27;
+    --el-table-tr-bg-color: #1a1f27;
+    --el-table-header-bg-color: #20262f;
+    --el-table-row-hover-bg-color: #242a33;
+    --el-table-border-color: #2c333c;
+    --el-table-text-color: #e8eaed;
+    --el-table-header-text-color: #e8eaed;
+    background: #1a1f27 !important;
+    color: #e8eaed !important;
+}
+
+html.dark .el-table th.el-table__cell,
+html.dark .el-table td.el-table__cell,
+html.dark .el-table__inner-wrapper:before {
+    background: transparent !important;
+    color: #e8eaed !important;
+    border-color: #2c333c !important;
+}
+
+/* 分析页卡片 */
+html.dark .analysis-page,
+html.dark .echarts-box,
+html.dark .data-card,
+html.dark .chart-card {
+    background: #1a1f27 !important;
+    color: #e8eaed !important;
+}
+
+html.dark .el-empty__description p,
+html.dark .el-table__empty-text {
+    color: #9aa0a8 !important;
+}
+
+/* 下拉/弹层深色 */
+html.dark .drop-panel,
+html.dark.ui-motion-ios .drop-panel {
+    background: #1a1f27 !important;
+    color: #e8eaed !important;
+}
+
+html.dark .drop-item {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+html.dark .el-dropdown-menu {
+    background: #1a1f27 !important;
+}
+
+html.dark .el-dropdown-menu__item {
+    color: #e8eaed !important;
+}
+
+html.dark .el-dialog,
+html.dark .el-drawer,
+html.dark .el-message-box {
+    background: #1a1f27 !important;
+    color: #e8eaed !important;
+}
+
+html.dark .el-dialog__header,
+html.dark .el-dialog__body,
+html.dark .el-drawer__body {
+    color: #e8eaed !important;
+}
+
+/* 输入框/开关 */
+html.dark .el-input__wrapper,
+html.dark .el-textarea__inner,
+html.dark .el-select__wrapper {
+    background: #242a33 !important;
+    box-shadow: 0 0 0 1px #343b45 inset !important;
+}
+
+html.dark .el-input__inner,
+html.dark .el-textarea__inner,
+html.dark .el-select__selected-item {
+    color: #e8eaed !important;
+}
+
+/* 站内信浮层 */
+html.dark .msg-float-panel,
+html.dark .message-list,
+html.dark .msg-float-btn {
+    /* 按钮保持品牌色，面板深色 */
+}
+
+html.dark .msg-float-panel {
+    background: #1a1f27 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #e8eaed !important;
+}
+
+html.dark .message-list,
+html.dark .msg-list,
+html.dark .chat-list {
+    background: #141920 !important;
+}
+
+html.dark .message-item,
+html.dark .bubble {
+    background: #242a33 !important;
+    color: #e8eaed !important;
+}
+
+html.dark .message-item.is-mine,
+html.dark .bubble.me {
+    background: linear-gradient(145deg, #3b9cff, #0a84ff) !important;
+    color: #fff !important;
+}
+
+/* ul/ol 等基础 */
+ul, ol {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+*:focus {
+    outline: none;
+}
+
+.el-message {
+    white-space: nowrap !important;
+}
+
+.message-bottom {
+    top: auto !important;
+    bottom: 20px !important;
+
+    .el-icon {
+        display: none !important;
+    }
+}
+
+.el-input-group__append, .el-input-group__prepend {
+    color: var(--el-text-color-primary) !important;
+}
+
+.tox .tox-dialog__iframe.tox-dialog__iframe--opaque {
+    background-color: var(--el-bg-color) !important;
+}
+
+.tox .tox-dialog--width-lg {
+    height: 850px !important;
+    @media (max-width: 1024px) {
+        height: calc(100% - 40px) !important;
+    }
+}
+
+.tox .tox-dialog__body-content {
+    overflow: initial !important;
+    max-height: min(850px, calc(100vh - 110px)) !important;
+    @media (max-width: 1024px) {
+        box-sizing: initial !important;
+        max-height: min(850px, calc(100% - 40px)) !important;
+    }
+}
+
+.tox-dialog__body-content {
+    height: auto !important;
+    flex-basis: auto !important;
+}
+
+.tox .tox-collection--grid .tox-collection__group {
+    max-height: 220px !important;
+}
+
+:root {
+    --el-color-primary: #1890ff;
+    --el-color-primary-dark-2: #1064c0;
+    --el-color-primary-light-3: #4dabff;
+    --el-color-primary-light-5: #69c0ff;
+    --el-color-primary-light-7: #91d5ff;
+    --el-color-primary-light-9: #e6f7ff;
+
+    --extra-light-fill: #FAFCFF;
+    --settings-page-background: #fafbfc;
+    --light-ill: #F5F7FA;
+    --light-border: #E4E7ED;
+    --header-actions-border: inset 0 -1px 0 0 var(--el-border-color-lighter);
+    --aside-backgound: #191A23;
+    --aside-menu-active-background: #27282D;
+    --loadding-background: rgba(255, 255, 255, 0.8);
+    --dark-border: #CDD0D6;
+    --base-fill: #F0F2F5;
+    --regular-text-color: #585d69;
+    --light-border-color: #e7e9ec;
+    --aside-right-border: 3px 0 5px rgba(0, 21, 41, .35);
+    --choose-account-background: var(--el-color-primary-light-8);
+    --el-text-color-regular: var(--el-text-color-primary);
+    --email-scroll-content-color: rgba(25, 41, 59, 0.4);
+    --email-hover-background: #F2F6FC;
+    --email-right-click-background: #FDF6EC;
+    --login-border: none;
+    --form-desc-color: #71717a;
+    --login-switch-color: #006be6;
+    --scrollbar-track-color: #A8ABB2;
+    --base-border-color: #DCDFE6;
+    --secondary-text-color: #909399;
+    --message-block-color: rgba(0, 0, 0, 0);
+    --loading-hide-transition: all 200ms;
+    --vt-x: 50%;
+    --vt-y: 50%;
+    --vt-duration: 520ms;
+    --vt-easing: ease-out;
+}
+
+.dark {
+    --extra-light-fill: #1a1f27;
+    --settings-page-background: #0c0f14;
+    --light-ill: #242a33;
+    --light-border: #343b45;
+    --aside-backgound: #0c121a;
+    --aside-menu-active-background: rgba(56, 132, 255, 0.2);
+    --header-actions-border: inset 0 -1px 0 0 rgba(255,255,255,.06);
+    --loadding-background: rgba(0, 0, 0, 0.45);
+    --dark-border: #343b45;
+    --base-fill: #242a33;
+    --regular-text-color: #9aa0a8;
+    --light-border-color: #2c333c;
+    --aside-right-border: none;
+    --choose-account-background: #243044;
+    --email-scroll-content-color: rgba(255, 255, 255, 0.35);
+    --email-hover-background: #1d242e;
+    --email-right-click-background: var(--email-hover-background);
+    --login-border: none;
+    --form-desc-color: #9aa0a8;
+    --login-switch-color: rgb(102, 177, 255);
+    --scrollbar-track-color: #343b45;
+    --base-border-color: #343b45;
+    --secondary-text-color: #9aa0a8;
+    --message-block-color: rgba(0, 0, 0, 0.25);
+    --el-border-color: #343b45 !important;
+    --el-bg-color: #0c0f14;
+    --el-text-color-primary: #e8eaed;
+}
+
+.el-input {
+    --el-input-text-color: var(--el-text-color-primary) !important;
+}
+
+/* 视图过渡，基于径向剪裁 */
+html.dark,
+html:not(.dark) {
+    view-transition-name: root;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+/* 层级控制，确保对应方向动画在上层可见 */
+html[data-theme-to="dark"]::view-transition-new(root) { z-index: 2; }
+html[data-theme-to="dark"]::view-transition-old(root) { z-index: 1; }
+html[data-theme-to="light"]::view-transition-old(root) { z-index: 2; }
+html[data-theme-to="light"]::view-transition-new(root) { z-index: 1; }
+
+/* 切到暗色：新视图从点击点向外扩散 */
+html[data-theme-to="dark"]::view-transition-new(root) {
+    clip-path: circle(0px at var(--vt-x) var(--vt-y));
+    animation: vt-radial-in var(--vt-duration) var(--vt-easing) forwards;
+}
+
+/* 切到浅色：旧视图向点击点收缩 */
+html[data-theme-to="light"]::view-transition-old(root) {
+    clip-path: circle(var(--vt-end-radius, 0px) at var(--vt-x) var(--vt-y));
+    animation: vt-radial-out var(--vt-duration) var(--vt-easing) forwards;
+}
+
+@keyframes vt-radial-in {
+    from { clip-path: circle(0px at var(--vt-x) var(--vt-y)); }
+    to   { clip-path: circle(var(--vt-end-radius, 0px) at var(--vt-x) var(--vt-y)); }
+}
+
+@keyframes vt-radial-out {
+    from { clip-path: circle(var(--vt-end-radius, 0px) at var(--vt-x) var(--vt-y)); }
+    to   { clip-path: circle(0px at var(--vt-x) var(--vt-y)); }
+}
