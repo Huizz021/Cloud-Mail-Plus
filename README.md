@@ -5,7 +5,7 @@
 在原项目的收发信、多用户、RBAC 等能力之上，强化了 **多用户下的邮件转发治理**、**管理员与用户沟通**，以及 **更清晰的管理端/用户端界面**。
 
 > **原项目 / 上游**：https://github.com/maillab/cloud-mail  
-> **许可证**：MIT
+> **许可证**：MIT（与上游一致，请保留上游版权与 LICENSE）
 
 ---
 
@@ -91,6 +91,10 @@ cloud-mail
 ## 致谢
 
 感谢 [maillab/cloud-mail](https://github.com/maillab/cloud-mail) 提供优秀的开源 Cloudflare 邮箱基础项目。
+
+## 开发说明
+
+本项目在 [maillab/cloud-mail](https://github.com/maillab/cloud-mail) 基础上修改。部分功能开发与代码修改使用了 AI 工具辅助，最终实现由项目维护者负责审阅与维护。
 
 ## 许可证
 
