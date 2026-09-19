@@ -1,0 +1,28 @@
+name = "cloud-mail-local"
+main = "src/index.js"
+compatibility_date = "2025-06-04"
+keep_vars = true
+
+[dev]
+ip = "127.0.0.1"
+port = 8787
+
+[[d1_databases]]
+binding = "db"
+database_name = "email-local"
+database_id = "local-email-db"
+
+[[kv_namespaces]]
+binding = "kv"
+id = "local-kv-id"
+
+[vars]
+ai_model = ""
+analysis_cache = false
+orm_log = true
+domain = ["example.com", "example2.com"]
+admin = "admin@example.com"
+jwt_secret = "b7f29a1d-18e2-4d3b-941f-f6b2c97c02fd"
+# 可选：配置后可在审批列表显示 CF Destination 验证状态
+# cf_api_token = ""
+# cf_zone_id = ""
